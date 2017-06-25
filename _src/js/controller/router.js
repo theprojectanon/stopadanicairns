@@ -24,7 +24,10 @@ define([
         },
         'events':   'local-events',
         'news':     'in-the-news',
-        'missing':  '*missing',
+        'missing':  {
+          title: 'Home',
+          route: '*missing'
+        }
       }
     },
 
@@ -36,10 +39,10 @@ define([
             - previous URL stored in session data
             - JS redirect would not work with FB
          */
-        if(sessionStorage.redirect) {
-          history.replaceState(null, null, sessionStorage.redirect);
-          delete sessionStorage.redirect;
-        }
+        // if(sessionStorage.redirect) {
+        //   history.replaceState(null, null, sessionStorage.redirect);
+        //   delete sessionStorage.redirect;
+        // }
         this.on(":router:before", this.fn.on.before);
         this.start();
       },
