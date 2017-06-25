@@ -1,0 +1,30 @@
+.facebook {
+	position: absolute;
+	top: 0;
+	background: $white;
+	color: $fb-blue;
+	font-family: $rift;
+	padding: 0.2em 2em;
+	width: 100%;
+	transform: translateY(-99%);
+	text-decoration: none;
+	text-align: center;
+	font-size: 1.4em;
+
+	&:hover {
+		background: $fb-blue;
+		color: $white;
+	}
+
+	u {
+		text-decoration: none;
+	    border-bottom: 0.1em dotted;
+	    line-height: 1em;
+	    display: inline-block;
+	}
+}
+
+.facebook--header {
+	display: inline-block;
+	@extend %button--arrow;
+}

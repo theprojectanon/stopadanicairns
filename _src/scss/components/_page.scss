@@ -1,0 +1,286 @@
+.page {
+	background: $white;
+	overflow: hidden;
+	box-shadow: 0 -0.1em 0.1em rgba($black, 0.5);
+	padding-bottom: 5em;
+	counter-reset: abbr;
+
+	abbr {
+		display: inline-block;
+		margin-left: 0.25em;
+
+		&::after {
+			counter-increment: abbr; 
+		    content: counter(abbr);
+		    display: inline-block;
+		    background: rgba($grey, 0.25);
+		    width: 1.4em;
+		    vertical-align: text-bottom;
+		    text-align: center;
+		    line-height: 1.4em;
+		    font-weight: bold;
+		    font-size: 0.75em;
+		    border: 1px solid $grey;
+		}
+
+		&[data-i]::after {
+			// content: attr(data-i);
+		}
+
+		&:hover {
+			a {
+				visibility: visible;
+			}
+
+			&::after {
+				background: $red;
+				color: $white;
+				border-color: $red;
+			}
+
+			&::before {
+				content: "";
+				display: block;
+				width: 5em;
+    			height: 1.4em;
+				position: absolute;
+    			transform: translate(-40%, 0%);
+			}
+		}
+
+		a {
+			visibility: hidden;
+			transform: translateY(-100%);
+			position: absolute;
+			text-align: center;
+			width: 100%;
+			left: 0;
+			text-decoration: none;
+			cursor: pointer;
+			box-shadow: 0 0 0 0.1em $red;
+			background: $white;
+			padding: 0.4em 1em;
+			display: block;
+
+
+			&::before {
+				content: attr(title);
+				display: inline;
+				color: $red;
+				border-bottom: 1px dotted;
+			}
+
+			&:hover::before {
+				border-bottom-color: transparent;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.page--header {
+	background: $black;
+	color: $white;
+	text-align: center;
+	padding: 0 1em;
+	position: relative;
+	z-index: 0;
+
+	h2 {
+		font-family: $rift;
+		font-size: 2.2em;
+		padding: 0.75em 0 0.5em;
+	}
+
+	p {
+		width: 52.5em;
+		max-width: 90%;
+		margin: 0 auto;
+		padding-bottom: 1em;
+	}
+
+	&::after {
+		content: "";
+		width: 70em;
+	    height: 70em;
+	    position: absolute;
+	    bottom: 0;
+	    z-index: -1;
+	    background: $black;
+	    transform: translate(-50%, 50%) scaleY(0.05) rotate(45deg);
+	    left: 50%;
+	}
+}
+
+
+.page--content {
+	padding-top: 4em;
+	position: relative;
+	width: 52.5em;
+	max-width: 90%;
+	margin: 0 auto;
+	line-height: 1.7em;
+
+	@include media(from tablet) {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.column {
+		font-size: 0.9em;
+		position: relative;
+		width: 100%;
+
+		@include media(from tablet) {
+			padding: 0 1em;
+			max-width: 45%;
+		}
+
+		@include media(from tablet) {
+			@for $i from 1 through 20 {
+				&:not([data-order]):nth-child(#{$i}) {
+					order: #{$i + 1};
+				}
+				
+				&[data-order="#{$i}"] {
+					order: #{$i};
+				}
+
+				&[data-shift-y$="#{$i}"] {
+					margin-top: #{$i*1em};
+
+					&[data-shift-y^="-"] {
+						margin-top: #{-$i*1em};
+					}
+				}
+
+				&[data-shift-x$="#{$i}"] {
+					position: relative;
+					left: #{$i*1em};
+
+					&[data-shift-x^="-"] {
+						left: #{-$i*1em};
+					}
+				}
+			}
+		}
+	}
+
+	.column--wide {
+		@include media(from tablet) {
+			max-width: 50%;
+
+			p {
+				width: calc(100% + 2em);
+			}
+		}
+	}
+
+	.column--video {
+		padding: 0;
+		width: 100%;
+		margin: 0 0 2em;
+
+		@include media(from tablet) {
+			max-width: 50%;
+		}
+
+		.inner {
+			position: relative;
+			padding-top: 56.25%;
+		}
+		
+		iframe[src*="youtube"] {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+
+
+			@include media(tablet) {
+				width: 110%;
+				height: 110%;
+			}
+
+			@include media(from tablet) {
+				left: -1em;
+			}
+
+
+			@include media(from laptop) {
+				width: 115%;
+				height: 115%;
+			}
+		}
+	}
+
+	p {
+		margin-bottom: 1em;
+		text-align: justify;
+		position: relative;
+	}
+
+	.column--quote {
+		font-size: 0.7em;
+		margin-bottom: 1.5em;
+
+		@include media(from tablet) {
+			font-size: 0.9em;
+			max-width: 50%;
+		}
+
+		.small {
+			font-size: 0.75em;
+		}
+
+		p {
+			font-size: 2.8em;
+		    color: $red;
+		    font-style: italic;
+		    line-height: 1.3em;
+		    text-align: left;
+		    margin-top: 1em;
+			
+			@include media(from tablet) {
+		    	margin: 1.25em 0 1.75em;
+		    }
+
+			&::before {
+				position: absolute;
+				content: "\201C";
+				transform: translateX(-100%);
+			}
+
+			&::after {
+				content: "\201D";
+				position: absolute;
+			}
+		}
+
+		footer {
+			box-shadow: 0 -0.3em 0 0 $grey;
+			padding-top: 0.5em;
+			text-align: right;
+			line-height: 1.75em;
+		}
+
+		a {
+			font-size: 1.2em;
+			font-weight: bold;
+			text-decoration: none;
+			font-style: normal;
+
+			&:hover {
+				border-bottom: 2px dotted;
+			}
+		}
+
+		audio {
+			width: 100%;
+			margin-bottom: 0.25em;
+		}
+	}
+
+	
+}

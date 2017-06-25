@@ -1,0 +1,44 @@
+.floater {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	transform: translateX(-50%);
+	left: 50%;
+	z-index: 2;
+
+
+	@include media(from tablet7) {
+		max-width: 40em;
+		bottom: 2rem;
+		box-shadow: 0.05em 0.05em 1em rgba($black, 0.05);
+	}
+
+	[class*="--header"] {
+		@extend %button--arrow;
+		display: block;
+		font-family: $rift;
+		padding: 0.4em 1em;
+		font-size: 1em;
+	}
+
+	> * {
+		margin-bottom: 0;
+
+		[class*="--outer"] {
+			display: block;
+			transition: 0.2s max-height;
+			max-height: 0em;
+			overflow: hidden;
+		}
+
+		&:hover,
+		&.open,
+		&.focus {
+			[class*="--outer"] {
+				max-height: 11em;
+			}
+		}
+		
+	}
+
+}

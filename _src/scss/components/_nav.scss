@@ -1,0 +1,202 @@
+.nav--outer {
+	position: relative;
+	height: 4.75em;
+	// font-size: 0.7em;
+
+	.nav {
+		height: 4.75em;
+		position: fixed;
+		z-index: 3;
+
+	// font-size: 0.7em;
+
+	}
+}
+
+.nav {
+	@extend .heading;
+	background: $black;
+	color: $white;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 1;
+	box-shadow: 0 1px 0 0 $black,
+				0 0.3rem 0.1rem 0 rgba($black, 0.3);
+
+	@include media(from tablet) {
+		display: flex;
+	}
+}
+
+.nav--lockup {
+	margin-right: auto;
+	font-size: 2.22em;
+	color: $grey;
+	align-self: center;
+	margin-left: 0.2em;
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 100%;
+
+	a {
+		border-bottom: 2px dotted transparent;
+		text-decoration: none;
+	    display: block;
+	    line-height: 1em;
+	    margin: 0 0 -0.05em 2.15em;
+
+	    &:hover {
+	    	color: $white;
+	    	border-bottom-color: currentColor;
+	    }
+	}
+
+	img {
+		position: absolute;
+		width: 2em;
+		top: 0.075em;
+		left: 0;
+	}
+}
+
+.nav--inner {
+
+	@include media(to tablet7) {
+		visibility: hidden;
+		align-items: center;
+		display: flex;
+		height: 100vh;
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: -1;
+	}
+
+	@include media(from tablet) {
+
+	}
+}
+
+.nav--items {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	flex-direction: column;
+	padding: 0 0 0 35%;
+    width: 100%;
+
+	@include media(from tablet) {
+		padding: 0;
+		height: 100%;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+  	.item {
+		width: 100%;
+		height: 4.75em;
+		display: flex;
+		align-items: center;
+		padding: 0.5em 0.75em;
+    	transform: translateX(100%);
+    	line-height: 1.25em;
+
+		@include media(from tablet) {
+			width: auto;
+			height: auto;
+  			margin: 0 2em 0 0;
+    		transform: none;
+		}
+
+		$menu: "adani", "involved", "events", "news";
+		@each $item in $menu {
+			body[data-route="#{$item}"] & {
+				&[data-state="#{$item}"] {
+					background: $white;
+					color: $black
+				}
+			}
+		}
+  	}
+
+	.button {
+		span {
+			padding-bottom: 0.125em;
+		}
+
+		&::before {
+			@include media(to tablet7) {
+		  		content: "";
+		  		display: block;
+		  		position: absolute;
+		  		left: 0;
+		  		top: 0;
+		  		right: 0;
+		  		bottom: 0;
+		  	}
+		}
+	}
+}
+
+#nav--toggle {
+	display: none;
+
+	+ .body-wrap label[for="nav--toggle"] {
+		top: 0.25em;
+	    position: absolute;
+	    right: 0.4em;
+	    display: block;
+	    width: 1em;
+	    height: 1em;
+		font-size: 3em;
+		
+		&::before {
+			content: "☰";
+			line-height: 1em;
+		    display: block;
+		    height: 100%;
+		    width: 100%;
+		    text-align: center;
+		}
+
+		@include media(from tablet) {
+			display: none;
+		}
+
+		span {
+			@extend %u-visually-hidden;
+		}
+	}
+
+	&:checked + .body-wrap {
+		label[for="nav--toggle"] {
+			
+			&::before {
+				content: "×";
+				line-height: 0.525em;
+				font-size: 2em;
+			}
+		}
+
+		.nav--inner {
+			visibility: visible;
+			background: $black;
+			transition: 0.2s transform;
+
+			.item {
+				transition: 0.2s transform;
+				transform: translateX(0);
+
+				@for $i from 1 through 6 {
+					&:nth-child(#{$i}) {
+						transition-delay: $i*0.1s;
+					}
+
+				}
+			}
+		}
+	}
+}

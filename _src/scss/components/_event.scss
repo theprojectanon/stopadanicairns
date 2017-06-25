@@ -1,0 +1,122 @@
+.event {
+	background: $white;
+	overflow: hidden;
+
+	a {
+		text-decoration: none;
+	}
+
+	@include media(from tablet7) {
+		max-width: 40em;
+		bottom: 2rem;
+		box-shadow: 0.05em 0.05em 1em rgba($black, 0.05);
+	}
+
+	.button--outer {
+		background: $fb-blue;
+		overflow: hidden;
+		display: inline-block;
+		padding: 0.4em 0.75em 0.6em 1.25em;
+		text-decoration: none;
+
+		.button {
+			color: $white;
+			text-align: right;
+			font-size: 0.75em;
+			background: transparent;
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+.event--header {
+	background: $red;
+	color: $white;
+}
+
+.event--inner {
+	font-size: 0.75em;
+	align-items: center;
+	padding: 0.75em 0;
+	display: flex;
+	justify-content: space-between;
+
+	@include media(from tablet7) {
+		font-size: 1em;
+		padding-left: 0.25em;
+	}
+}
+
+.event--date,
+.event--title {
+	font-family: $rift;
+}
+
+.event--date {
+	font-size: 2em;
+	padding: 0 0.4em;
+	box-shadow: 0.1em 0 0 $grey;
+
+	@include media(from tablet7) {
+		padding: 0.4em;
+	}
+
+	&::before,
+	&::after {
+		display: block;
+		text-align: center;
+		line-height: 1em;
+	}
+
+	&::before {
+		color: $red;
+	}
+
+
+	$months: "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec";
+	@for $i from 1 through 12  {
+		&[datetime*="-#{if($i < 10, '0' + $i, $i)}-"] {
+			&::before {
+				content: "#{nth($months, $i)}";
+			}
+		}
+	}
+	@for $i from 1 through 31  {
+		&[datetime*="-#{if($i < 10, '0' + $i, $i)}"] {
+			&::after {
+				content: "#{$i}";
+			}
+		}
+	}
+}
+
+.event--details {
+	padding: 0 1.25em;
+	font-size: 0.9em;
+
+	p {
+		margin-bottom: 0.4em;
+		display: none;
+
+		@include media(from tablet7) {
+			display: block;
+		}
+	}
+
+	time,
+	address {
+		display: inline-block;
+		font-weight: 600;
+		font-style: normal;
+	}
+}
+
+.event--title {
+	font-size: 1.75em;
+	line-height: 1.1em;
+}
+
+.event--data {
+	align-self: flex-start;
+}

@@ -1,0 +1,191 @@
+@keyframes typewriter-4 {
+  0% { max-width: 0; }
+  99% { max-width: 1.8em; overflow: hidden; }
+  100% { max-width: auto; overflow: visible; }
+}
+@keyframes typewriter-5 {
+  0% { max-width: 0; }
+  99% { max-width: 2.3em; overflow: hidden; }
+  100% { max-width: auto; overflow: visible; }
+}
+@keyframes typewriter-6 {
+  0% { max-width: 0; }
+  99% { max-width: 2.65em; overflow: hidden; }
+  100% { max-width: auto; overflow: visible; }
+}
+@keyframes typewriter-4r {
+  0% { max-width: 1.8em; overflow: hidden; }
+  100% { max-width: 0; }
+}
+@keyframes typewriter-5r {
+  0% { max-width: 2.3em; overflow: hidden; }
+  100% { max-width: 0; }
+}
+@keyframes typewriter-6r {
+  0% { max-width: 2.7em; overflow: hidden; }
+  100% { max-width: 0; }
+}
+
+.hero {
+  	position: relative;
+  	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: right;
+	z-index: 0;
+
+	.video {
+		position: fixed;
+		z-index: -1;
+	}
+}
+
+.hero--items {
+	position: relative;
+	top: -2em;
+}
+
+.hero--item {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	
+	&:first-child {
+		position: relative;
+	}
+
+	@for $i from 1 through 10 {
+		.hero--items[data-active="#{$i}"] & {
+			&:nth-child(#{$i}) {
+				visibility: visible;
+
+				@for $ii from 3 through 7 {
+					.typewriter[data-length="#{$ii}"] {
+						animation: typewriter-#{$ii} #{$ii*0.15s} steps(#{$ii}) 0.2s 1 normal both;
+					}
+
+					.hero--sub {
+						transition: 0.4s #{($ii + 1)*0.15s} max-height;
+					}
+				}
+
+				.hero--sub {
+					max-height: 3.5em;
+				}
+			}
+		}
+
+		.hero--items[data-active="#{$i}"].reverse & {
+			&:nth-child(#{$i}) {
+				@for $ii from 3 through 7 {
+					.typewriter[data-length="#{$ii}"] {
+						animation: typewriter-#{$ii}r #{$ii*0.1s} steps(#{$ii}) 1 normal both;
+					}
+
+					.hero--sub {
+						transition: none;
+					}
+				}
+
+				.hero--sub {
+					max-height: 0;
+				}
+			}
+		}
+	}
+}
+
+.hero--title {
+	@extend .heading;
+	position: relative;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+	text-align: right;
+	color: $white;
+	font-size: 3.4em;
+	width: 5.75em;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	line-height: 1.0625em;
+	text-shadow: 0.04em 0.035em 0 $black,
+							 0 0 0.035em rgba($black, 0.5);
+
+	@include media(from tablet) {
+		font-size: 5em;
+	}
+
+	.wrap {
+		&::before {
+			content: "";
+			background: url(../images/bracket.svg) no-repeat;
+			background-size: contain;
+			width: 0.5em;
+			height: 0.5em;
+			position: absolute;
+		}
+
+		&:first-child {
+			display: inline-block;
+
+			&::before {
+				top: 0;
+				left: 0;
+				transform: translate(-50%, -30%);
+			}
+		}
+
+		&:last-child::before {
+			right: 0;
+			bottom: 0;
+			transform: scale(-1, -1) translate(-60%, -40%);
+		}
+
+		position: relative;
+		white-space: nowrap;
+	}
+
+	.typewriter {
+		display: inline-block;
+		word-wrap: break-word;
+	    height: 1em;
+	    overflow: hidden;
+	    position: relative;
+	    top: 0.01em;
+	    text-align: left;
+	    vertical-align: top;
+		white-space: initial;
+	}
+
+}
+
+.hero--sub {
+	position: absolute;
+	right: -1em;
+	white-space: nowrap;
+	color: $white;
+	font-weight: 800;
+	text-transform: uppercase;
+	line-height: 1.2em;
+	display: inline-block;
+	overflow: hidden;
+	max-height: 0;
+	font-size: 0.8em;
+
+	@include media(from tablet) {
+		font-size: 1em;
+		right: 0;
+		left: auto;
+	}
+
+	u {
+	 	text-decoration: none;
+		box-shadow: 0 1px;
+	}
+
+	.inner {
+		padding: 0.5em 1em;
+		background: $black;
+	}
+}

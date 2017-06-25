@@ -1,0 +1,7 @@
+html {
+  @include fluid-type(font-size, 20em, 73.125em, 0.875em, 1.125em);
+  color: $black;
+  font-family: $muli;
+  font-weight: 300;
+  line-height: 1.375;
+}

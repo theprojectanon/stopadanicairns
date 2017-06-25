@@ -1,0 +1,18 @@
+.footer {
+	position: relative;
+	background: $black;
+	color: $grey;
+	padding: 2rem 1rem 5.5rem;
+	text-align: center;
+	font-size: 0.75em;
+
+	a:not([class*="button"]) {
+		text-decoration: none;
+		border-bottom: 1px dotted;
+	}
+
+	.button--generic {
+		font-size: 1.2em;
+		background: $grey;
+	}
+}
