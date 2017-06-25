@@ -86,11 +86,23 @@ define([
 
           this.fn.state("loading");
 
-          // submit form
-          require([this.props.$el.signup.form.eq(0).action + '&' + this._.serialise(data)], function (e) {
+          // submit form (json-p)
+          var fn = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 5),
+              script = document.createElement('script');
+              
+          window[fn] = function (e) {
+            delete window[fn];
             if(e.result && e.result==="success") this.fn.state("success");
             else this.fn.state("error");
-          }.bind(this));
+          }.bind(this);
+
+          script.src = [this.props.$el.signup.form.eq(0).action + fn, this._.serialise(data)].join("&");
+          $('head').eq(0).appendChild(script);
+
+          /*require([this.props.$el.signup.form.eq(0).action + '&' + this._.serialise(data)], function (e) {
+            if(e.result && e.result==="success") this.fn.state("success");
+            else this.fn.state("error");
+          }.bind(this));*/
         },
 
         reset: function (e) {
