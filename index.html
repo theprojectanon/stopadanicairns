@@ -19,7 +19,8 @@
   </head>
 
 
-  <body>
+  <body style="opacity:0">
+    <link rel="stylesheet" href="assets/css/styles.css" media="none" onload="if(media!='all')media='all';setTimeout(function(){document.body.style.opacity=1},10)">
 
     <input id="nav--toggle" type="checkbox">
     <div class="body-wrap">
@@ -312,13 +313,10 @@
 
     </div>
     <!-- /body-wrap -->
-
-
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- <link rel='preload' href="assets/css/styles.css" onload="rel='stylesheet';document.documentElement.style.opacity=document.body.style.opacity=1;"> -->
     <!-- <script data-main="_src/js/_require.js" src="_src/js/vendor/require/require-2.1.10.js"></script> -->
     <script src="assets/js/script.min.js?v=0.02"></script>
     
-
   </body>
 
 </html>
