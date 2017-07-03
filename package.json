@@ -4,7 +4,7 @@
 
   "config": {
     "url": {
-      "dev": "http://localhost/stopadani/cairns/"
+      "dev": "http://localhost/stopadani/site/"
     },
     "working": "_src"
   },

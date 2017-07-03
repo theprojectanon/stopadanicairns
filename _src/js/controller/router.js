@@ -13,7 +13,10 @@ define([
 
     props: {
       routes: {
-        home:     '',
+        home:     {
+          title: "Save our Future",
+          route: '',
+        },
         adani:    {
           title: "What is Adani?",
           route: 'what-is-adani',
@@ -25,7 +28,7 @@ define([
         'events':   'local-events',
         'news':     'in-the-news',
         'missing':  {
-          title: 'Home',
+          title: 'Save our Future',
           route: '*missing'
         }
       }
